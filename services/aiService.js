@@ -19,19 +19,20 @@ class AiService {
             }
             return text;
         }).join('\n');
-        
-        const prompt = `Você é um assistente técnico especializado em análise de código. 
-Abaixo estão os commits recentes do usuário "${username}" no repositório "${repo}".
-Escreva um resumo conciso (em um ou dois parágrafos) do que esse desenvolvedor construiu, consertou ou alterou no projeto. Não se baseie apenas nas mensagens de commit, mas analise o código das diffs (alterações de linhas) fornecidas para entender exatamente o que foi implementado de fato.
-Fale diretamente sobre as principais entregas dele e evite usar jargões muito complexos caso a mensagem seja simples.
 
-Commits e Diffs:
-${commitsText}
+        const prompt = `
+        Você é um assistente técnico especializado em análise de código. 
+        Abaixo estão os commits recentes do usuário "${username}" no repositório "${repo}".
+        Escreva um resumo conciso (em um ou dois parágrafos) do que esse desenvolvedor construiu, consertou ou alterou no projeto. Não se baseie apenas nas mensagens de commit, mas analise o código das diffs (alterações de linhas) fornecidas para entender exatamente o que foi implementado de fato.
+        Fale diretamente sobre as principais entregas dele e evite usar jargões muito complexos caso a mensagem seja simples.
+
+        Commits e Diffs:
+        ${commitsText}
 `;
 
         try {
             const response = await this.ai.models.generateContent({
-                model: "gemini-2.5-flash",
+                model: "gemini-3.8-flash",
                 contents: prompt
             });
             return response.text;
