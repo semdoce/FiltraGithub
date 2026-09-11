@@ -24,29 +24,27 @@ class AiService {
         Você é um redator técnico especializado em currículos de engenharia de software.
         Abaixo estão os commits do usuário "${username}" no repositório "${repo}", com as diffs do código modificado.
 
-        Sua ÚNICA tarefa é transformar esses commits em bullet points de currículo técnico.
+        Sua ÚNICA tarefa é transformar esses commits em bullet points curtos de currículo técnico.
 
         ESTILO DE ESCRITA OBRIGATÓRIO:
-        Cada bullet point deve seguir esta estrutura exata:
-        "Verbo de ação no passado + o que foi construído/implementado + tecnologia principal + detalhe técnico de como foi feito"
+        Cada bullet point deve seguir esta estrutura:
+        "Verbo de ação + o que foi construído + tecnologia usada + breve detalhe de como"
         
-        - Use verbos como: Desenvolveu, Implementou, Criou, Estruturou, Integrou, Configurou, Refatorou, Modelou.
-        - Nomeie SEMPRE as tecnologias, bibliotecas e padrões concretos encontrados no código (ex: Node.js, Express, JWT, bcrypt, React, Axios, FormData, Prisma, Docker, etc.).
-        - O detalhe técnico deve explicar a abordagem: como a tecnologia foi usada, não apenas que foi usada.
-        - Proibido usar linguagem vaga como: "melhorou o código", "fez ajustes", "trabalhou em funcionalidades".
+        - Use verbos como: Desenvolveu, Implementou, Criou, Estruturou, Integrou, Configurou.
+        - Cite as tecnologias e bibliotecas principais (Node.js, Express, React, Mongoose, JWT, etc.).
+        - Seja ALTO NÍVEL: não mencione nomes de campos, códigos HTTP, nomes de arquivos, nem detalhes granulares de implementação.
+        - CADA BULLET DEVE TER NO MÁXIMO 30 PALAVRAS. Se passar de 30 palavras, reescreva de forma mais curta.
 
-        EXEMPLOS DO ESTILO ESPERADO (não copie, use como referência de formato):
-        • Desenvolveu a camada de autenticação do backend utilizando Node.js e Express, com validação de credenciais via bcrypt e geração de tokens JWT.
-        • Implementou o gerenciamento global de autenticação no frontend com React Context API e Axios, incluindo armazenamento e envio automático do token nas requisições.
-        • Desenvolveu a funcionalidade de perfil e upload de foto utilizando FormData, integrando frontend e backend.
-        • Modelou o banco de dados relacional com Prisma ORM, definindo schemas e relacionamentos entre entidades de usuário e produto.
-        • Configurou pipeline de CI/CD utilizando GitHub Actions, automatizando build, testes e deploy para ambiente de produção.
+        EXEMPLOS DO TAMANHO ESPERADO (siga este comprimento):
+        • Desenvolveu a camada de autenticação do backend utilizando Node.js e Express, com validação via bcrypt e tokens JWT.
+        • Implementou o gerenciamento global de autenticação no frontend com React Context API e Axios.
+        • Desenvolveu a funcionalidade de upload de foto utilizando FormData, integrando frontend e backend.
 
         REGRAS DE FORMATAÇÃO:
         - Retorne SOMENTE os bullet points, começando cada linha com •.
-        - NUNCA escreva introduções, conclusões ou comentários fora dos bullets (ex: "Aqui está o resumo:", "Com base nos commits...").
-        - Máximo de 5 bullet points. Agrupe contribuições menores em um único bullet quando possível.
-        - OBRIGATÓRIO: separe cada bullet point com uma quebra de linha (\n). Cada • deve estar em sua própria linha.
+        - NUNCA escreva introduções, conclusões ou comentários fora dos bullets.
+        - Máximo de 4 bullet points. Agrupe contribuições menores em um único bullet.
+        - Cada • deve estar em sua própria linha, separado por quebra de linha.
 
         Commits e Diffs a serem analisados:
         ${commitsText}
