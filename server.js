@@ -1,5 +1,6 @@
 // server.js
 require('dotenv').config();
+const path = require('path');
 const express = require('express');
 const CommitController = require('./controllers/commitController');
 
@@ -7,6 +8,7 @@ const app = express();
 const PORT = 3000;
 
 app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'views'));
 
 // Rota inicial da View
 app.get('/', (req, res) => {
@@ -22,3 +24,6 @@ app.get('/search', CommitController.checkUserCommits);
 app.listen(PORT, () => {
     console.log(`Servidor rodando em http://localhost:${PORT}`);
 });
+
+// Exporta o app para a Vercel usar como Serverless Function
+module.exports = app;
