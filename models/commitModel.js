@@ -10,13 +10,19 @@ class CommitModel {
         
         console.log(`[GitHub API] Buscando URL corrigida: ${url}`);
 
+        const headers = { 
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)',
+            'Accept': 'application/vnd.github.v3+json',
+            'Connection': 'keep-alive'
+        };
+
+        if (process.env.GITHUB_ACCESS_TOKEN) {
+            headers['Authorization'] = `Bearer ${process.env.GITHUB_ACCESS_TOKEN}`;
+        }
+
         const response = await fetch(url, {
             method: 'GET',
-            headers: { 
-                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)',
-                'Accept': 'application/vnd.github.v3+json',
-                'Connection': 'keep-alive'
-            }
+            headers
         });
 
         if (response.status === 403) {
@@ -37,13 +43,19 @@ class CommitModel {
         const url = `https://api.github.com/repos/${cleanOwner}/${cleanRepo}/commits/${sha}`;
         
         try {
+            const headers = { 
+                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)',
+                'Accept': 'application/vnd.github.v3.diff',
+                'Connection': 'keep-alive'
+            };
+
+            if (process.env.GITHUB_ACCESS_TOKEN) {
+                headers['Authorization'] = `Bearer ${process.env.GITHUB_ACCESS_TOKEN}`;
+            }
+
             const response = await fetch(url, {
                 method: 'GET',
-                headers: { 
-                    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)',
-                    'Accept': 'application/vnd.github.v3.diff',
-                    'Connection': 'keep-alive'
-                }
+                headers
             });
 
             if (!response.ok) {
